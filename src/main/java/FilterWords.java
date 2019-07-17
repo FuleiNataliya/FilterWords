@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 
-public class FilterWords {
+class FilterWords {
 
     private FileReader fr;
     private int count;
@@ -16,7 +16,7 @@ public class FilterWords {
     private Map<String, Integer> songWordMap;
     private List<String> ignored;
 
-    public FilterWords(String fileName) throws FileNotFoundException {
+    FilterWords(String fileName) throws FileNotFoundException {
 
         fr = new FileReader(fileName);
         songWordMap = new TreeMap<>();
@@ -32,7 +32,7 @@ public class FilterWords {
         return ignored;
     }
 
-    public int calculateCount() throws IOException {
+    int calculateCount() throws IOException {
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
         count = 0;
@@ -56,7 +56,7 @@ public class FilterWords {
         return count;
     }
 
-    public void findWords() {
+    void findWords() {
         List<String> commonWord = new ArrayList<>();
         for (Map.Entry<String, Integer> pair : songWordMap.entrySet()) {
             if (pair.getValue() > 3) {
