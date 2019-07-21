@@ -11,7 +11,6 @@ import java.util.TreeMap;
 class FilterWords {
 
     private FileReader fr;
-    private int count;
     private int count1;
     private Map<String, Integer> songWordMap;
     private List<String> ignored;
@@ -21,21 +20,12 @@ class FilterWords {
         fr = new FileReader(fileName);
         songWordMap = new TreeMap<>();
         ignored = new ArrayList<>();
-
-    }
-
-    public int getCount1() {
-        return count1;
-    }
-
-    public List<String> getIgnored() {
-        return ignored;
     }
 
     int calculateCount() throws IOException {
         BufferedReader br = new BufferedReader(fr);
         String line = br.readLine();
-        count = 0;
+        int count = 0;
         while (line != null) {
             String[] parts = line.split("[\\p{Punct}\\p{Space}]+");
             for (String word : parts) {
@@ -44,7 +34,6 @@ class FilterWords {
                     ignored.add(word);
                     count1++;
                 } else if (songWordMap.containsKey(word)) {
-                    int count = songWordMap.get(word) + 1;
                     songWordMap.replace(word, count);
                 } else {
                     songWordMap.put(word, 1);
@@ -64,6 +53,14 @@ class FilterWords {
             }
         }
         System.out.println("Most often found: " + commonWord);
+    }
+
+    public int getCount1() {
+        return count1;
+    }
+
+    public List<String> getIgnored() {
+        return ignored;
     }
 }
 
